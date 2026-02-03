@@ -5,18 +5,38 @@ public class Validparanthisis {
         String s ="{[(]}";
         System.out.println(s+" -> "+validpara(s));
     }
-
-    private static boolean validpara(String s) {
+    
+    // Replace and Contains
+    private static boolean valid2(String str) {
         while (true){
-            if(s.contains("{}")){
-                s=s.replace("{}","");
-            }  else if(s.contains("()")){
-                s=s.replace("()","");
-            }  else if(s.contains("[]")){
-                s=s.replace("[]","");
+            if(str.contains("{}")){
+                str=str.replace("{}","");
+            } else if (str.contains("()")){
+                str=str.replace("()","");
+            } else if (str.contains("[]")){
+                str=str.replace("[]","");
             }else {
-                return s.isEmpty();
+                return str.isEmpty();
             }
         }
+    }
+
+    // Using stack 
+    private static boolean valid(String str) {
+        Stack<Character> stack = new Stack<>();
+        for (Character ch:str.toCharArray()){
+            if(ch == '{' || ch == '[' || ch == '('){
+                stack.push(ch);
+            }else if(ch == '}' || ch == ']' || ch == ')'){
+                if(stack.isEmpty()){
+                    return false;
+                }
+                char top = stack.pop();
+                if(ch=='}' && top!='{' && ch==']' && top!='[' && ch==')' && top!='('){
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
     }
 }
