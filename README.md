@@ -106,3 +106,21 @@ The transaction is read-write.
 The transaction timeout defaults to the default timeout of the underlying transaction system, or to none if timeouts are not supported.
 Any RuntimeException or Error triggers rollback, and any checked Exception does not
 Caching mechanism in springboot -
+
+
+1. You have a user table with 50 records. → Write a query to fetch 20 records starting from 5th row (first & last name only)?
+SELECT first_name, last_name
+FROM users
+ORDER BY id
+LIMIT 20 OFFSET 4;
+
+2, Highest 2 salary
+
+SELECT DISTINCT salary
+FROM employees
+ORDER BY salary DESC
+LIMIT 1 OFFSET 2;
+
+1st highest → OFFSET 0
+2nd highest → OFFSET 1
+3rd highest → OFFSET 2
